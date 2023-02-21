@@ -6,11 +6,11 @@
 
 import React, { useMemo, useEffect } from "react";
 import {
-  Router as RouterOriginal,
+  BrowserRouter as RouterOriginal,
   useParams,
   useLocation,
-  useHistory,
-  useRouteMatch,
+  useNavigate,
+  useMatch,
 } from "react-router-dom";
 import queryString from "query-string";
 
@@ -21,9 +21,9 @@ export const history = createBrowserHistory();
 
 // Export our <Router> component
 // Includes custom history object and component for auto-scrolling to top
-export function Router({ children }) {
+export function BrowserRouter({ children }) {
   return (
-    <RouterOriginal history={history}>
+    <RouterOriginal>
       <ScrollToTop />
       {children}
     </RouterOriginal>
@@ -37,8 +37,8 @@ export function Router({ children }) {
 export function useRouter() {
   const params = useParams();
   const location = useLocation();
-  const history = useHistory();
-  const match = useRouteMatch();
+  const navigate = useNavigate();
+  const match = useMatch();
 
   // Return our custom router object
   // Memoize so that a new object is only returned if something changes
@@ -46,12 +46,10 @@ export function useRouter() {
     return {
       params,
       location,
-      history,
       match,
       // For convenience add push(), replace(), pathname at top level
-      push: history.push,
-      replace: history.replace,
-      pathname: location.pathname,
+      navigate,
+      path: "location.pathname",
       // Merge params and parsed query string into single "query" object
       // so that they can be used interchangeably.
       // Example: /:topic?sort=popular -> { topic: "react", sort: "popular" }
@@ -60,7 +58,7 @@ export function useRouter() {
         ...params,
       },
     };
-  }, [params, match, location, history]);
+  }, [params, match, location, navigate]);
 }
 
 // Remove or customize if you need more advanced scroll behavior
@@ -75,11 +73,11 @@ function ScrollToTop() {
 
 export {
   Route,
-  Switch,
+  Routes,
   Link,
   NavLink,
   useParams,
   useLocation,
-  useHistory,
-  useRouteMatch,
+  useNavigate,
+  useMatch,
 } from "react-router-dom";

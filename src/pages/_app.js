@@ -8,7 +8,7 @@ import AuthPage from "./auth";
 import DashboardPage from "./dashboard";
 import SettingsPage from "./settings";
 import LegalPage from "./legal";
-import { Switch, Route, Router } from "./../util/router";
+import { Routes, Route, BrowserRouter } from "./../util/router";
 import PurchasePage from "./purchase";
 import FirebaseActionPage from "./firebase-action";
 import NotFoundPage from "./404";
@@ -16,43 +16,44 @@ import "./../util/analytics";
 import Chat from "./../components/Chat";
 import { AuthProvider } from "./../util/auth";
 import { QueryClientProvider } from "./../util/db";
+// import { BrowserRouter } from "react-router-dom";
 
 function App(props) {
   return (
     <QueryClientProvider>
       <AuthProvider>
         <Chat />
-        <Router>
+        <BrowserRouter>
           <>
             <Navbar />
 
-            <Switch>
-              <Route exact path="/" component={IndexPage} />
+            <Routes>
+              <Route exact path="/" element={ <IndexPage /> } />
 
-              <Route exact path="/about" component={AboutPage} />
+              <Route exact path="/about" element={AboutPage} />
 
-              <Route exact path="/pricing" component={PricingPage} />
+              <Route  path="/pricing" exact element={ <PricingPage/> } />
 
-              <Route exact path="/auth/:type" component={AuthPage} />
+              <Route exact path="/auth/:type" element={AuthPage} />
 
-              <Route exact path="/dashboard" component={DashboardPage} />
+              <Route exact path="/dashboard" element={DashboardPage} />
 
-              <Route exact path="/settings/:section" component={SettingsPage} />
+              <Route exact path="/settings/:section" element={SettingsPage} />
 
-              <Route exact path="/legal/:section" component={LegalPage} />
+              <Route exact path="/legal/:section" element={LegalPage} />
 
-              <Route exact path="/purchase/:plan" component={PurchasePage} />
+              <Route exact path="/purchase/:plan" element={PurchasePage} />
 
               <Route
                 exact
                 path="/firebase-action"
-                component={FirebaseActionPage}
+                element={FirebaseActionPage}
               />
 
-              <Route component={NotFoundPage} />
-            </Switch>
+              <Route element={NotFoundPage} />
+            </Routes>
           </>
-        </Router>
+        </BrowserRouter>
       </AuthProvider>
     </QueryClientProvider>
   );

@@ -5,7 +5,7 @@ import PricingSection from "./../components/PricingSection";
 function PricingPage(props) {
   return (
     <>
-      <Meta title="Pricing" />
+      {/* <Meta title="Pricing" /> */}
       <PricingSection />
     </>
   );

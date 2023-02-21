@@ -14,7 +14,7 @@ function PurchasePage(props) {
     if (auth.user.planIsActive) {
       // If user already has an active plan
       // then take them to Stripe billing
-      router.push("/settings/billing");
+      router.navigate("/settings/billing");
     } else {
       // Otherwise go to checkout
       redirectToCheckout(router.query.plan).catch((error) => {

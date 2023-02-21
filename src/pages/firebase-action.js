@@ -20,7 +20,7 @@ function FirebaseActionPage(props) {
     switch (mode) {
       case "resetPassword":
         // Redirect to change password page
-        router.replace(`/auth/changepass?oobCode=${oobCode}`);
+        router.navigate(`/auth/changepass?oobCode=${oobCode}`, {replace: true});
         break;
       case "recoverEmail":
         // Reset to original email

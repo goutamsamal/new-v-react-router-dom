@@ -38,14 +38,14 @@ function Meta(props) {
     <Helmet>
       <title>{meta.title}</title>
       <meta content={meta.description} name="description" key="description" />
-      {meta.domain && <link rel="canonical" href={`${meta.domain}${router.pathname}${router.location.search}`} key="canonical" />}
+      {meta.domain && <link rel="canonical" href={`${meta.domain}${router.path}${router.location.search}`} key="canonical" />}
 
       {/* Open Graph */}
       <meta property="og:title" content={meta.title} key="og-title" />
       <meta property="og:description" content={meta.description} key="og-description" />
       <meta property="og:site_name" content={meta.siteName} key="og-site-name" />
       <meta property="og:type" content="website" key="og-type" />
-      {meta.domain && <meta property="og:url" content={`${meta.domain}${router.pathname}${router.location.search}`} key="og-url" />}
+      {meta.domain && <meta property="og:url" content={`${meta.domain}${router.path}${router.location.search}`} key="og-url" />}
       {meta.domain && meta.image && <meta property="og:image" content={`${meta.domain}${meta.image}`} key="og-image" />}
 
       {/* Twitter */}
